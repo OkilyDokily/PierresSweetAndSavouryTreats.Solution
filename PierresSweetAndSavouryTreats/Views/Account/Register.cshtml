@@ -1,0 +1,8 @@
+@model PierresSweetAndSavouryTreats.ViewModels.RegisterViewModel
+
+
+@using(Html.BeginForm())
+{
+  @Html.EditorFor(x => x.Email)
+  @Html.EditorFor(x => x.Password)
+}
