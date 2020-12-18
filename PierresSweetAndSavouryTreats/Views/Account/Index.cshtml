@@ -1,0 +1,11 @@
+@using System.Security.Claims
+
+
+@if(!(User.FindFirst(ClaimTypes.NameIdentifier)==null))
+{
+  <p>@User.FindFirst(ClaimTypes.NameIdentifier).Value</p>
+}
+
+<p>@Html.ActionLink("Login","Login")</p>
+<p>@Html.ActionLink("Register","Register")</p>
+

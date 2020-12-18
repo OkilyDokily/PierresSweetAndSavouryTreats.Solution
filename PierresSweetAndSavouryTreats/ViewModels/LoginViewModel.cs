@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PierresSweetAndSavouryTreats.ViewModels
 {
-  public class RegisterViewModel
+  public class LoginViewModel
   {
     [Required]
     public string Email { get; set; }

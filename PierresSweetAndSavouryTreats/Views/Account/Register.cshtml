@@ -1,8 +1,11 @@
 @model PierresSweetAndSavouryTreats.ViewModels.RegisterViewModel
 
 
-@using(Html.BeginForm())
+@using (Html.BeginForm())
 {
+  @Html.LabelFor(x => x.Email)
   @Html.EditorFor(x => x.Email)
+  @Html.LabelFor(x=>x.Password)
   @Html.EditorFor(x => x.Password)
+  <input type="submit" value="Register">
 }

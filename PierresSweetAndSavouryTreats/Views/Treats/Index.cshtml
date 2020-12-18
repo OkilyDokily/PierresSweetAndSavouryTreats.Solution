@@ -1,0 +1,7 @@
+
+@using PierresSweetAndSavouryTreats.Models
+<p>@Html.ActionLink("Create","Create")</p>
+@foreach(Treat treat in @Model)
+{
+  <p>@Html.ActionLink(@treat.Name,"Details", new {id = @treat.Id})</p>
+}

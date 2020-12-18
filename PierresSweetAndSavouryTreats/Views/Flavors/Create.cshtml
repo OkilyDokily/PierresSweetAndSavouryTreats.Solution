@@ -1,0 +1,8 @@
+@model PierresSweetAndSavouryTreats.Models.Flavor
+
+@using(Html.BeginForm())
+{
+  @Html.LabelFor(x=>x.Name)
+  @Html.EditorFor(x=>x.Name)
+  <input type="submit" value="Submit">
+}
