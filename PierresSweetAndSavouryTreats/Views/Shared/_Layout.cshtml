@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  @using System.Security.Claims
+
+  @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
+  {
+    <p>@User.Identity.Name</p>
+  }
+  @RenderBody()
+  @Html.Partial("links")
+</body>
+
+</html>

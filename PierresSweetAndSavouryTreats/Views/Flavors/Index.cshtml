@@ -1,4 +1,9 @@
 @using PierresSweetAndSavouryTreats.Models
+
+@{
+  Layout = "_Layout";
+}
+
 <p>@Html.ActionLink("Create","Create")</p>
 @foreach(Flavor flavor in @Model)
 {

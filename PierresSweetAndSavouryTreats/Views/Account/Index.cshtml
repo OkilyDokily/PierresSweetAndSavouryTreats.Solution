@@ -1,11 +1,13 @@
 @using System.Security.Claims
 
-
-@if(!(User.FindFirst(ClaimTypes.NameIdentifier)==null))
-{
-  <p>@User.FindFirst(ClaimTypes.NameIdentifier).Value</p>
+@{
+  Layout = "_Layout";
 }
 
 <p>@Html.ActionLink("Login","Login")</p>
 <p>@Html.ActionLink("Register","Register")</p>
 
+@using (Html.BeginForm("Logout", "Account"))
+{
+  <input type="submit" value="Logout">
+}

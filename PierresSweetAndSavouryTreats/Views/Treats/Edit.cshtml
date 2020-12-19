@@ -1,0 +1,9 @@
+@model PierresSweetAndSavouryTreats.Models.Treat
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(x=>x.Id)
+  @Html.LabelFor(x=>x.Name)
+  @Html.EditorFor(x => x.Name)
+  <input type="submit" value="Edit">
+}

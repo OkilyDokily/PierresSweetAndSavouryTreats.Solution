@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using PierresSweetAndSavouryTreats.Models;
 using Microsoft.AspNetCore.Identity;
 using PierresSweetAndSavouryTreats.ViewModels;
+using System.Threading.Tasks;
+using System;
 
 namespace PierresSweetAndSavouryTreats.Controllers
 {
@@ -28,10 +30,15 @@ namespace PierresSweetAndSavouryTreats.Controllers
     }
 
     [HttpPost]
-    public ActionResult Register(RegisterViewModel registerViewModel)
+    public async Task<ActionResult> Register(RegisterViewModel registerViewModel)
     {
-      _userManager.CreateAsync(new ApplicationUser { Email = registerViewModel.Email, PasswordHash = registerViewModel.Password });
-      return RedirectToAction("Index");
+      Microsoft.AspNetCore.Identity.IdentityResult result = await _userManager.CreateAsync(new ApplicationUser { UserName = registerViewModel.Email }, registerViewModel.Password);
+      if (result.Succeeded)
+      {
+        return RedirectToAction("Index");
+      }
+      return RedirectToAction("Register");
+      
     }
 
     public ActionResult Login()
@@ -40,9 +47,22 @@ namespace PierresSweetAndSavouryTreats.Controllers
     }
 
     [HttpPost]
-    public ActionResult Login(LoginViewModel login)
+    public async Task<ActionResult> Login(LoginViewModel login)
     {
-      _signInManager.PasswordSignInAsync(login.Email, login.Password, true, false);
+      var signInResult = await _signInManager.PasswordSignInAsync(login.Email, login.Password, true, false);
+      if (signInResult.Succeeded)
+      {
+        return RedirectToAction("Index", "Home");
+      }
+      else
+      {
+        return RedirectToAction("Login");
+      }
+    }
+    [HttpPost]
+    public async Task<ActionResult> Logout()
+    {
+      await _signInManager.SignOutAsync();
       return RedirectToAction("Index");
     }
   }

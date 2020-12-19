@@ -9,8 +9,8 @@ using PierresSweetAndSavouryTreats.Models;
 namespace PierresSweetAndSavouryTreats.Migrations
 {
     [DbContext(typeof(PierresSweetAndSavouryTreatsContext))]
-    [Migration("20201217214801_identity")]
-    partial class identity
+    [Migration("20201218213042_reset")]
+    partial class reset
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,6 +71,9 @@ namespace PierresSweetAndSavouryTreats.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -109,6 +112,8 @@ namespace PierresSweetAndSavouryTreats.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -188,7 +193,7 @@ namespace PierresSweetAndSavouryTreats.Migrations
                     b.ToTable("Flavors");
                 });
 
-            modelBuilder.Entity("PierresSweetAndSavouryTreats.Models.FlavorTreats", b =>
+            modelBuilder.Entity("PierresSweetAndSavouryTreats.Models.FlavorTreat", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -216,6 +221,13 @@ namespace PierresSweetAndSavouryTreats.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Treats");
+                });
+
+            modelBuilder.Entity("PierresSweetAndSavouryTreats.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -263,7 +275,7 @@ namespace PierresSweetAndSavouryTreats.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("PierresSweetAndSavouryTreats.Models.FlavorTreats", b =>
+            modelBuilder.Entity("PierresSweetAndSavouryTreats.Models.FlavorTreat", b =>
                 {
                     b.HasOne("PierresSweetAndSavouryTreats.Models.Flavor", "Flavor")
                         .WithMany("Treats")
