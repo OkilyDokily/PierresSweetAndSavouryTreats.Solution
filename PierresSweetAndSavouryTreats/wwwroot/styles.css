@@ -19,3 +19,14 @@ div.inline-block{
   display: inline-block;
   width: 100px;
 }
+
+.outline{
+  background-color: white !important;
+  color: black;
+}
+
+
+.outline:hover{
+  background-color: white !important;
+  color: black;
+}
