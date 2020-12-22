@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 
-
 namespace PierresSweetAndSavouryTreats.Controllers
 {
   public class TreatsController : Controller
@@ -33,7 +32,6 @@ namespace PierresSweetAndSavouryTreats.Controllers
       return RedirectToAction("Index");
     }
 
-
     public ActionResult Details(int id)
     {
       return View(_db.Treats.Include(x => x.Flavors).ThenInclude(x => x.Flavor).FirstOrDefault(x => x.Id == id));
@@ -44,16 +42,20 @@ namespace PierresSweetAndSavouryTreats.Controllers
     {
       Treat treat = _db.Treats.Include(x => x.Flavors).ThenInclude(x => x.Flavor).FirstOrDefault(x => x.Id == id);
       List<Flavor> flavors = treat.Flavors.Select(x => x.Flavor).ToList();
-      ViewBag.FlavorId = new SelectList(_db.Flavors.Where(x => !(flavors.Any(f => f == x))).Select(x => new { FlavorId = x.Id, Name = x.Name }).ToList(), "FlavorId", "Name");
+      ViewBag.FlavorId = new SelectList(_db.Flavors.Where(x => !(flavors.Any(f => f == x))).Select(x => new { FlavorId = x.Id, Name = x.Name }).ToList().Prepend( new {FlavorId = 0 ,Name = "Select a Flavor"}), "FlavorId", "Name");
       return View();
     }
 
     [HttpPost, Authorize]
     public ActionResult Add(int id, int flavorid)
     {
-      _db.FlavorTreats.Add(new FlavorTreat { TreatId = id, FlavorId = flavorid });
-      _db.SaveChanges();
-      return RedirectToAction("Details", new { id = id });
+      if(!(flavorid == 0))
+      {
+        _db.FlavorTreats.Add(new FlavorTreat { TreatId = id, FlavorId = flavorid });
+        _db.SaveChanges();
+        return RedirectToAction("Details", new { id = id });
+      }
+      return RedirectToAction("Add", new {id = id});
     }
 
     [HttpPost, Authorize]

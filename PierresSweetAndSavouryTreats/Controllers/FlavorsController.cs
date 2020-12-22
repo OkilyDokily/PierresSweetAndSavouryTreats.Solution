@@ -43,16 +43,20 @@ namespace PierresSweetAndSavouryTreats.Controllers
     {
       Flavor flavor = _db.Flavors.Include(x => x.Treats).ThenInclude(x => x.Treat).FirstOrDefault(x => x.Id == id);
       List<Treat> treats = flavor.Treats.Select(x => x.Treat).ToList();
-      ViewBag.TreatId = new SelectList(_db.Treats.Where(x => !(treats.Any(t => t == x))).Select(x => new { TreatId = x.Id, Name = x.Name }).ToList(), "TreatId", "Name");
+      ViewBag.TreatId = new SelectList(_db.Treats.Where(x => !(treats.Any(t => t == x))).Select(x => new { TreatId = x.Id, Name = x.Name }).ToList().Prepend(new { TreatId = 0, Name = "Select a Treat" }), "TreatId", "Name");
       return View();
     }
 
     [HttpPost, Authorize]
     public ActionResult Add(int id, int treatid)
     {
-      _db.FlavorTreats.Add(new FlavorTreat { FlavorId = id, TreatId = treatid });
-      _db.SaveChanges();
-      return RedirectToAction("Details", new { id = id });
+      if (!(treatid == 0))
+      {
+        _db.FlavorTreats.Add(new FlavorTreat { FlavorId = id, TreatId = treatid });
+        _db.SaveChanges();
+        return RedirectToAction("Details", new { id = id });
+      }
+      return RedirectToAction("Add",new {id = id});
     }
 
     [HttpPost, Authorize]
@@ -71,7 +75,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
       return View(flavor);
     }
 
-    [HttpPost,Authorize]
+    [HttpPost, Authorize]
     public ActionResult Edit(Flavor flavor)
     {
       _db.Entry(flavor).State = EntityState.Modified;
@@ -86,7 +90,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
       int details = flavortreat.FlavorId;
       _db.FlavorTreats.Remove(flavortreat);
       _db.SaveChanges();
-      return RedirectToAction("Details", new {id = details});
+      return RedirectToAction("Details", new { id = details });
     }
   }
 }

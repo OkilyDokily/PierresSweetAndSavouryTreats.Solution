@@ -38,7 +38,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
         return RedirectToAction("Index");
       }
       return RedirectToAction("Register");
-      
+
     }
 
     public ActionResult Login()

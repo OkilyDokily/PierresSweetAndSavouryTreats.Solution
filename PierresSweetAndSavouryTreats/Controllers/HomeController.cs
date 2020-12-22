@@ -5,19 +5,18 @@ using System.Linq;
 
 namespace PierresSweetAndSavouryTreats.Controllers
 {
-    public class HomeController : Controller
+  public class HomeController : Controller
+  {
+    private readonly PierresSweetAndSavouryTreatsContext _db;
+    public HomeController(PierresSweetAndSavouryTreatsContext db)
     {
-
-        private readonly PierresSweetAndSavouryTreatsContext _db;
-        public HomeController(PierresSweetAndSavouryTreatsContext db)
-        {
-           _db = db;
-        }
-        public ActionResult Index()
-        {
-            List<Flavor> flavors = _db.Flavors.ToList();
-            List<Treat> treats = _db.Treats.ToList();
-            return View((treats,flavors));
-        }
+      _db = db;
     }
+    public ActionResult Index()
+    {
+      List<Flavor> flavors = _db.Flavors.ToList();
+      List<Treat> treats = _db.Treats.ToList();
+      return View((treats, flavors));
+    }
+  }
 }
