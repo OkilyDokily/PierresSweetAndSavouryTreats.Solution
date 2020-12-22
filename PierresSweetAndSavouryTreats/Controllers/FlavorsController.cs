@@ -78,5 +78,15 @@ namespace PierresSweetAndSavouryTreats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = flavor.Id });
     }
+
+    [HttpPost, Authorize]
+    public ActionResult Remove(int id)
+    {
+      FlavorTreat flavortreat = _db.FlavorTreats.FirstOrDefault(x => x.Id == id);
+      int details = flavortreat.FlavorId;
+      _db.FlavorTreats.Remove(flavortreat);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new {id = details});
+    }
   }
 }

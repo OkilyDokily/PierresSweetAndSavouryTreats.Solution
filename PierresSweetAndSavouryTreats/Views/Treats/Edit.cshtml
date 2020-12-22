@@ -1,9 +1,15 @@
 @model PierresSweetAndSavouryTreats.Models.Treat
 
+@{
+  Layout = "_Layout";
+}
+
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(x=>x.Id)
-  @Html.LabelFor(x=>x.Name)
-  @Html.EditorFor(x => x.Name)
-  <input type="submit" value="Edit">
+  <div class="input-group">
+    @Html.LabelFor(x=>x.Name)
+    @Html.TextBoxFor(x => x.Name,new {@class="form-control"})
+  </div>
+  <input type="submit" value="Edit" class="btn btn-default">
 }

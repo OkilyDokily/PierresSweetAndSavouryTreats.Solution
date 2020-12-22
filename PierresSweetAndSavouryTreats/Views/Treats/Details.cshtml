@@ -5,25 +5,37 @@
   Layout = "_Layout";
 }
 
-<p>@Model.Name</p>
+<h1>@Model.Name</h1>
 
  @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
   {
     <p>@Html.ActionLink("Add flavor","Add",new{id = @Model.Id})</p>
   }
 
-
+<hr>
+<p>Flavors associated with this treat:</p>
 @foreach (FlavorTreat flavortreat in @Model.Flavors)
 {
-  @Html.ActionLink(flavortreat.Flavor.Name,"Details","Flavors",new {id = flavortreat.Flavor.Id})
+  <div>
+  <div class="inline-block"> @Html.ActionLink(flavortreat.Flavor.Name,"Details","Flavors",new {id = flavortreat.Flavor.Id})</div>
+
+   @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
+  {
+   @using (@Html.BeginForm("Remove", "Flavors", new { id = flavortreat.Id },FormMethod.Post,false, new {@class="inline"}))
+    {
+      <input type="submit" value="Remove this flavor from this treat" class="btn btn-danger ">
+    }
+  }
+  </div>
 }
 
  @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
   {
+    <hr>
     <p>@Html.ActionLink("Edit","Edit",new{id = @Model.Id})</p>
     @using (@Html.BeginForm("Delete","Treats",new{id = @Model.Id}))
     {
-      <input type="submit" value="Delete this Treat">
+      <input type="submit" value="Delete this Treat" class="btn btn-danger">
     }
   }
 

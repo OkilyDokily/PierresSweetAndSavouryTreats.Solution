@@ -4,6 +4,6 @@
 
 @using (Html.BeginForm())
 {
-  @Html.DropDownList("FlavorId")
-  <input type="submit" value="Add flavor to treat">
+  @Html.DropDownList("FlavorId",null,new {@class="btn btn-default dropdown-toggle"})
+  <input type="submit" value="Add flavor to treat" class="btn">
 }

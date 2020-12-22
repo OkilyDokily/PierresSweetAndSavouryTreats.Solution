@@ -1,15 +1,21 @@
-.input-group
-{
+.input-group{
   width: 200px;
 }
 
-input[type=submit]
-{
+input[type=submit]{
   margin-top: 3px;
   margin-bottom: 8px;
 }
 
-div.shift
-{
+div.shift{
   padding-left: 4px;
+}
+
+.inline{
+  display: inline;
+}
+
+div.inline-block{
+  display: inline-block;
+  width: 100px;
 }
