@@ -4,9 +4,12 @@
 
 @model PierresSweetAndSavouryTreats.Models.Flavor
 
-@using(Html.BeginForm())
+@using (Html.BeginForm())
 {
-  @Html.LabelFor(x=>x.Name)
-  @Html.EditorFor(x=>x.Name)
-  <input type="submit" value="Submit">
+  <div class="input-group">
+    @Html.LabelFor(x=>x.Name)
+    @Html.TextBoxFor(x=>x.Name,new {@class="form-control"})
+  </div>
+
+  <input type="submit" value="Submit" class="btn btn-default">
 }

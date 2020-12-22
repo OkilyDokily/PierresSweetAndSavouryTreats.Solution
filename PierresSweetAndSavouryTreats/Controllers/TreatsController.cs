@@ -21,7 +21,6 @@ namespace PierresSweetAndSavouryTreats.Controllers
     {
       return View();
     }
-
     public ActionResult Index()
     {
       return View(_db.Treats.ToList());

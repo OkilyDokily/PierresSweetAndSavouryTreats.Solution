@@ -4,12 +4,19 @@
 
 @model PierresSweetAndSavouryTreats.ViewModels.RegisterViewModel
 
-
+<h3>Register</h3>
+<hr>
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(x => x.Email)
-  @Html.EditorFor(x => x.Email)
-  @Html.LabelFor(x=>x.Password)
-  @Html.EditorFor(x => x.Password)
-  <input type="submit" value="Register">
+  <div class="input-group">
+    @Html.LabelFor(x=>x.Email)
+    @Html.TextBoxFor(x => x.Email,new {@class= "form-control"})
+  </div>
+
+  <div class="input-group">
+    @Html.LabelFor(x=>x.Password)
+    @Html.TextBoxFor(x => x.Password,new {@class= "form-control"})
+  </div>
+
+  <input type="submit" value="Login" class="btn btn-default">
 }

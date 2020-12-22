@@ -4,18 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="~/bootstrap.css">
+  <link rel="stylesheet" href="~/styles.css">
   <title>Document</title>
 </head>
 
 <body>
   @using System.Security.Claims
+  <div class="container">
+    @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
+    {
+      <p>@Html.ActionLink(@User.Identity.Name,"Index","Account")</p>
+    }
+    else
+    {
+      <p>@Html.ActionLink("Log in","Login","Account") to create treats and flavors</p>
+    }
+    @Html.Partial("jumbotron")
+    @RenderBody()
+    @Html.Partial("links")
+  </div>
 
-  @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
-  {
-    <p>@User.Identity.Name</p>
-  }
-  @RenderBody()
-  @Html.Partial("links")
 </body>
 
 </html>

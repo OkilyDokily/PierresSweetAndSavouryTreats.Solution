@@ -1,7 +1,24 @@
+@using PierresSweetAndSavouryTreats.Models;
+@model (List<PierresSweetAndSavouryTreats.Models.Treat>,List<PierresSweetAndSavouryTreats.Models.Flavor>)
+
 @{
   Layout = "_Layout";
 }
 
-<p>@Html.ActionLink("Go to Account page","Index","Account")</p>
-<p>@Html.ActionLink("Go to Treats page","Index","Treats")</p>
-<p>@Html.ActionLink("Go to Flavors page","Index","Flavors")</p>
+<h3>Our complete list of treats</h3>
+<div class="shift">
+  @foreach (Treat treat in @Model.Item1)
+  {
+    <h3>@Html.ActionLink(treat.Name,"Details","Treats",new {id = treat.Id})</h3>
+  }
+</div>
+
+
+<h3>Our complete list of flavors</h3>
+
+<div class="shift">
+  @foreach (Flavor flavor in @Model.Item2)
+  {
+    <h3>@Html.ActionLink(flavor.Name,"Details","Flavors",new {id = flavor.Id})</h3>
+  }
+</div>

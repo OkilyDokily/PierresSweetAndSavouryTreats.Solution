@@ -4,8 +4,10 @@
   Layout = "_Layout";
 }
 
-<p>@Html.ActionLink("Create","Create")</p>
-@foreach(Flavor flavor in @Model)
+<p>@Html.ActionLink("Create a flavor","Create")</p>
+<hr>
+<h4>Our Flavors:</h4>
+@foreach (Flavor flavor in @Model)
 {
   <p>@Html.ActionLink(@flavor.Name,"Details", new {id = @flavor.Id})</p>
 }

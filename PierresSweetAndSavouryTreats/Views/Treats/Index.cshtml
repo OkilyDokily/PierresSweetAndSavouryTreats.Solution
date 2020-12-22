@@ -5,6 +5,8 @@
 }
 
 <p>@Html.ActionLink("Create","Create")</p>
+<hr>
+<h4>Our Treats:</h4>
 @foreach(Treat treat in @Model)
 {
   <p>@Html.ActionLink(@treat.Name,"Details", new {id = @treat.Id})</p>
