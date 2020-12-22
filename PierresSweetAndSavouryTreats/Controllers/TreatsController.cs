@@ -33,7 +33,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
       return RedirectToAction("Index");
     }
 
-    [Authorize]
+
     public ActionResult Details(int id)
     {
       return View(_db.Treats.Include(x => x.Flavors).ThenInclude(x => x.Flavor).FirstOrDefault(x => x.Id == id));
