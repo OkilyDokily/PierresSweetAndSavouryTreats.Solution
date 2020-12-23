@@ -29,15 +29,12 @@
   </div>
 }
 
-
-
- @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
+@if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
+{
+  <hr>
+  <p>@Html.ActionLink("Edit this flavor","Edit",new{id = @Model.Id})</p>
+  @using (@Html.BeginForm("Delete", "Flavors", new { id = @Model.Id }))
   {
-    <hr>
-    <p>@Html.ActionLink("Edit this flavor","Edit",new{id = @Model.Id})</p>
-    @using (@Html.BeginForm("Delete", "Flavors", new { id = @Model.Id }))
-    {
-      <input type="submit" value="Delete this Flavor" class="btn btn-danger">
-    }
-
+    <input type="submit" value="Delete this Flavor" class="btn btn-danger">
   }
+}
