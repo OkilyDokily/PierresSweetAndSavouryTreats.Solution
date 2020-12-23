@@ -18,5 +18,11 @@
     @Html.PasswordFor(x => x.Password,new {@class= "form-control"})
   </div>
 
+  <div class="input-group">
+    @Html.LabelFor(x=>x.PasswordMatch)
+    @Html.PasswordFor(x => x.Password,new {@class= "form-control"})
+  </div>
+
+
   <input type="submit" value="Login" class="btn btn-default">
 }

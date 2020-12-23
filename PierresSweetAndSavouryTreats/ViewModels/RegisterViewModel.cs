@@ -4,9 +4,14 @@ namespace PierresSweetAndSavouryTreats.ViewModels
 {
   public class RegisterViewModel
   {
-    [Required]
+    [Required(ErrorMessage = "This field is required.")]
     public string Email { get; set; }
-    [Required]
+    [Required(ErrorMessage = "This field is required.")]
     public string Password { get; set; }
+
+    [Required(ErrorMessage = "This field is required.")]
+    [Compare(nameof (Password),ErrorMessage = "Passwords don't match.")]
+    [Display(Name = "Matching Password")]
+    public string PasswordMatch { get; set; }
   }
 }

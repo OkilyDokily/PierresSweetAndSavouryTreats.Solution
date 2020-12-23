@@ -4,9 +4,9 @@ namespace PierresSweetAndSavouryTreats.ViewModels
 {
   public class LoginViewModel
   {
-    [Required]
+    [Required(ErrorMessage = "This field is required.")]
     public string Email { get; set; }
-    [Required]
+    [Required(ErrorMessage = "This field is required.")]
     public string Password { get; set; }
   }
 }
