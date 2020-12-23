@@ -3,8 +3,6 @@ using PierresSweetAndSavouryTreats.Models;
 using Microsoft.AspNetCore.Identity;
 using PierresSweetAndSavouryTreats.ViewModels;
 using System.Threading.Tasks;
-using System;
-using System.Linq;
 
 namespace PierresSweetAndSavouryTreats.Controllers
 {
