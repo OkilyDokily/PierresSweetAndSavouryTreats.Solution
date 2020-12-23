@@ -41,7 +41,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
           return RedirectToAction("Login");
         }
       }
-      return RedirectToAction("Register");
+      return View();
     }
 
     public ActionResult Login()
@@ -52,15 +52,16 @@ namespace PierresSweetAndSavouryTreats.Controllers
     [HttpPost]
     public async Task<ActionResult> Login(LoginViewModel login)
     {
-      var signInResult = await _signInManager.PasswordSignInAsync(login.Email, login.Password, true, false);
-      if (signInResult.Succeeded)
+      if (ModelState.IsValid)
       {
-        return RedirectToAction("Index", "Home");
+        var signInResult = await _signInManager.PasswordSignInAsync(login.Email, login.Password, true, false);
+        if (signInResult.Succeeded)
+        {
+          return RedirectToAction("Index", "Home");
+        }
       }
-      else
-      {
-        return RedirectToAction("Login");
-      }
+
+      return View();
     }
     [HttpPost]
     public async Task<ActionResult> Logout()

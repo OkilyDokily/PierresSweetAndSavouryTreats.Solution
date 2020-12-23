@@ -30,3 +30,8 @@ div.inline-block{
   background-color: white !important;
   color: black;
 }
+
+span.red{
+  display: block;
+  color:red !important;
+}

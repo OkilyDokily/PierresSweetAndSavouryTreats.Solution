@@ -11,11 +11,13 @@
   <div class="input-group">
     @Html.LabelFor(x=>x.Email)
     @Html.TextBoxFor(x => x.Email,new {@class= "form-control"})
+    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "red" })
   </div>
 
   <div class="input-group">
     @Html.LabelFor(x=>x.Password)
     @Html.PasswordFor(x => x.Password,new {@class= "form-control"})
+    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "red" })
   </div>
 
   <input type="submit" value="Login" class="btn btn-default">
