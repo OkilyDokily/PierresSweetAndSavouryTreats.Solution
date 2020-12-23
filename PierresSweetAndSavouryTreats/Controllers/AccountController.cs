@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using PierresSweetAndSavouryTreats.ViewModels;
 using System.Threading.Tasks;
 using System;
+using System.Linq;
 
 namespace PierresSweetAndSavouryTreats.Controllers
 {
@@ -32,13 +33,15 @@ namespace PierresSweetAndSavouryTreats.Controllers
     [HttpPost]
     public async Task<ActionResult> Register(RegisterViewModel registerViewModel)
     {
-      Microsoft.AspNetCore.Identity.IdentityResult result = await _userManager.CreateAsync(new ApplicationUser { UserName = registerViewModel.Email }, registerViewModel.Password);
-      if (result.Succeeded)
+      if (ModelState.IsValid)
       {
-        return RedirectToAction("Index");
+        Microsoft.AspNetCore.Identity.IdentityResult result = await _userManager.CreateAsync(new ApplicationUser { UserName = registerViewModel.Email }, registerViewModel.Password);
+        if (result.Succeeded)
+        {
+          return RedirectToAction("Login");
+        }
       }
       return RedirectToAction("Register");
-
     }
 
     public ActionResult Login()
