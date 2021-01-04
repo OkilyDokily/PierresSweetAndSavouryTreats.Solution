@@ -15,6 +15,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
     {
       _db = db;
     }
+
     [Authorize]
     public ActionResult Create()
     {
@@ -24,6 +25,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
     {
       return View(_db.Treats.ToList());
     }
+
     [HttpPost, Authorize]
     public ActionResult Create(Treat treat)
     {
@@ -31,31 +33,30 @@ namespace PierresSweetAndSavouryTreats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-
     public ActionResult Details(int id)
     {
       return View(_db.Treats.Include(x => x.Flavors).ThenInclude(x => x.Flavor).FirstOrDefault(x => x.Id == id));
     }
-    [Authorize]
 
+    [Authorize]
     public ActionResult Add(int id)
     {
       Treat treat = _db.Treats.Include(x => x.Flavors).ThenInclude(x => x.Flavor).FirstOrDefault(x => x.Id == id);
       List<Flavor> flavors = treat.Flavors.Select(x => x.Flavor).ToList();
-      ViewBag.FlavorId = new SelectList(_db.Flavors.Where(x => !(flavors.Any(f => f == x))).Select(x => new { FlavorId = x.Id, Name = x.Name }).ToList().Prepend( new {FlavorId = 0 ,Name = "Select a Flavor"}), "FlavorId", "Name");
+      ViewBag.FlavorId = new SelectList(_db.Flavors.Where(x => !(flavors.Any(f => f == x))).Select(x => new { FlavorId = x.Id, Name = x.Name }).ToList().Prepend(new { FlavorId = 0, Name = "Select a Flavor" }), "FlavorId", "Name");
       return View();
     }
 
     [HttpPost, Authorize]
     public ActionResult Add(int id, int flavorid)
     {
-      if(!(flavorid == 0))
+      if (!(flavorid == 0))
       {
         _db.FlavorTreats.Add(new FlavorTreat { TreatId = id, FlavorId = flavorid });
         _db.SaveChanges();
         return RedirectToAction("Details", new { id = id });
       }
-      return RedirectToAction("Add", new {id = id});
+      return RedirectToAction("Add", new { id = id });
     }
 
     [HttpPost, Authorize]
@@ -66,8 +67,8 @@ namespace PierresSweetAndSavouryTreats.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-    [Authorize]
 
+    [Authorize]
     public ActionResult Edit(int id)
     {
       Treat treat = _db.Treats.FirstOrDefault(x => x.Id == id);

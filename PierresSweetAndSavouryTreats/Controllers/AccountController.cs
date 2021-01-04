@@ -17,12 +17,10 @@ namespace PierresSweetAndSavouryTreats.Controllers
       _userManager = userManager;
       _db = db;
     }
-
     public ActionResult Register()
     {
       return View();
     }
-
     public ActionResult Index()
     {
       return View();
@@ -41,7 +39,6 @@ namespace PierresSweetAndSavouryTreats.Controllers
       }
       return View();
     }
-
     public ActionResult Login()
     {
       return View();
@@ -61,6 +58,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
 
       return View();
     }
+    
     [HttpPost]
     public async Task<ActionResult> Logout()
     {

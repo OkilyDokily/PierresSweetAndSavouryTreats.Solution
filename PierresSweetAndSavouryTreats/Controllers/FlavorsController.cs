@@ -15,7 +15,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
     {
       _db = db;
     }
-    
+
     [Authorize]
     public ActionResult Create()
     {
@@ -26,6 +26,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
     {
       return View(_db.Flavors.ToList());
     }
+
     [HttpPost, Authorize]
     public ActionResult Create(Flavor flavor)
     {
@@ -38,6 +39,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
     {
       return View(_db.Flavors.Include(x => x.Treats).ThenInclude(x => x.Treat).FirstOrDefault(x => x.Id == id));
     }
+    
     [Authorize]
     public ActionResult Add(int id)
     {
