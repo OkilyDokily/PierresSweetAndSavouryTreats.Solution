@@ -83,9 +83,9 @@ namespace PierresSweetAndSavouryTreats.Controllers
     }
 
     [HttpPost, Authorize]
-    public ActionResult Remove(int id)
+    public ActionResult Remove(int flavortreatid)
     {
-      FlavorTreat flavortreat = _db.FlavorTreats.FirstOrDefault(x => x.Id == id);
+      FlavorTreat flavortreat = _db.FlavorTreats.FirstOrDefault(x => x.Id == flavortreatid);
       int details = flavortreat.TreatId;
       _db.FlavorTreats.Remove(flavortreat);
       _db.SaveChanges();

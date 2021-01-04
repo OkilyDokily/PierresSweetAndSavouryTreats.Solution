@@ -19,9 +19,9 @@
   <div>
   <div class="inline-block"> @Html.ActionLink(flavortreat.Flavor.Name,"Details","Flavors",new {id = flavortreat.Flavor.Id})</div>
 
-   @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
+  @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
   {
-   @using (@Html.BeginForm("Remove", "Flavors", new { id = flavortreat.Id },FormMethod.Post,false, new {@class="inline"}))
+   @using (@Html.BeginForm("Remove", "Treats", new { flavortreatid = flavortreat.Id },FormMethod.Post,false, new {@class="inline"}))
     {
       <input type="submit" value="Remove this flavor from this treat" class="btn btn-danger outline">
     }

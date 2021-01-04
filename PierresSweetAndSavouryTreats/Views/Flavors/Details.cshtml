@@ -21,7 +21,7 @@
  
   @if (!(User.FindFirst(ClaimTypes.NameIdentifier) == null))
   {
-   @using (@Html.BeginForm("Remove", "Flavors", new { id = flavortreat.Id },FormMethod.Post,false, new {@class="inline"}))
+   @using (@Html.BeginForm("Remove", "Flavors", new { flavoritreatid = flavortreat.Id },FormMethod.Post,false, new {@class="inline"}))
     {
       <input type="submit" value="Remove this treat from this flavor" class="btn btn-danger outline">
     }
