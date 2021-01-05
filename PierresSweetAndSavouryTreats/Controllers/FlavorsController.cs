@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace PierresSweetAndSavouryTreats.Controllers
 {
@@ -39,7 +40,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
     {
       return View(_db.Flavors.Include(x => x.Treats).ThenInclude(x => x.Treat).FirstOrDefault(x => x.Id == id));
     }
-    
+
     [Authorize]
     public ActionResult Add(int id)
     {
@@ -58,7 +59,7 @@ namespace PierresSweetAndSavouryTreats.Controllers
         _db.SaveChanges();
         return RedirectToAction("Details", new { id = id });
       }
-      return RedirectToAction("Add",new {id = id});
+      return RedirectToAction("Add", new { id = id });
     }
 
     [HttpPost, Authorize]
